@@ -1,0 +1,69 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Build with GCC: debug",
+			"command": "gcc",
+			"args": [
+				"app.c",
+				"-g",
+				"-o",
+				"output/app-debug",       
+				"-IC:/msys64/mingw64/include",
+				"-LC:/msys64/mingw64/lib",
+				"-lSDL2"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"type": "shell",
+			"label": "Build with GCC",
+			"command": "gcc",
+			"args": [
+				"${fileBasename}",
+				"-o",
+				"output/${fileBasenameNoExtension}",       
+				"-IC:/msys64/mingw64/include",
+				"-LC:/msys64/mingw64/lib",
+				"-lSDL2"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "clean",
+			"type": "shell",
+			"command": "rm -rf output/*",
+			"windows": {
+			  "command": "Remove-Item -Recurse -Force output\\*"
+			},
+		},
+		{
+			"type": "shell",
+			"label": "build_tests",
+			"command": "g++",
+			"args": [
+				"tests/string_calculator_tests.cpp",
+				"-g",
+				"-o",
+				"out/test/string_calculator_test",       
+				"-IC:/msys64/mingw64/include",
+				"-LC:/msys64/mingw64/lib",
+				"-lgtest",
+				"-lgtest_main",
+				"-pthread"
+			],
+			"isBackground": true,
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
